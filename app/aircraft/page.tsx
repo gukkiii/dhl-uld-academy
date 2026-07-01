@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { aircraft } from "@/lib/data";
+import { aircraft, ulds } from "@/lib/data";
 import { AircraftGallery } from "@/components/aircraft/AircraftGallery";
 
 export const metadata: Metadata = {
@@ -23,7 +23,7 @@ export default function AircraftPage() {
         </p>
       </header>
 
-      <AircraftGallery aircraft={aircraft} />
+      <AircraftGallery aircraft={aircraft} ulds={ulds} />
     </div>
   );
 }

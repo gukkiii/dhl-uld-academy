@@ -3,15 +3,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
-import type { Aircraft } from "@/lib/data/types";
+import type { Aircraft, Uld } from "@/lib/data/types";
 import { AircraftCard } from "@/components/aircraft/AircraftCard";
 import { AircraftLoadingDiagram } from "@/components/aircraft/AircraftLoadingDiagram";
-import { Badge } from "@/components/ui/badge";
-
-function fmt(n: number): string {
-  return n.toLocaleString("en-US");
-}
-
 const gridVariants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.07 } },
@@ -19,9 +13,10 @@ const gridVariants = {
 
 interface AircraftGalleryProps {
   aircraft: Aircraft[];
+  ulds: Uld[];
 }
 
-export function AircraftGallery({ aircraft }: AircraftGalleryProps) {
+export function AircraftGallery({ aircraft, ulds }: AircraftGalleryProps) {
   const [selected, setSelected] = useState<Aircraft | null>(null);
 
   // Close on Escape + lock body scroll while the dialog is open.
@@ -76,7 +71,7 @@ export function AircraftGallery({ aircraft }: AircraftGalleryProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 12 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-card shadow-xl ring-1 ring-foreground/10"
+              className="relative z-10 flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-card shadow-xl ring-1 ring-foreground/10"
             >
               <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
                 <div>
@@ -84,7 +79,7 @@ export function AircraftGallery({ aircraft }: AircraftGalleryProps) {
                     {selected.name}
                   </h2>
                   <p className="text-sm text-muted-foreground">
-                    Loading configuration · {fmt(selected.maxPayloadKg)} kg max payload
+                    Loading configuration · {selected.maxPayloadKg.toLocaleString()} kg max payload
                   </p>
                 </div>
                 <button
@@ -98,27 +93,7 @@ export function AircraftGallery({ aircraft }: AircraftGalleryProps) {
               </div>
 
               <div className="flex flex-col gap-4 overflow-y-auto p-5">
-                <div className="rounded-xl border border-border bg-dhl-surface/60 p-3">
-                  <AircraftLoadingDiagram aircraft={selected} />
-                </div>
-
-                <div className="flex flex-wrap items-center gap-4 text-sm">
-                  <Legend color="var(--dhl-yellow)" label="Main-deck pallets" />
-                  <Legend color="var(--dhl-red)" label="Lower-deck containers" />
-                </div>
-
-                <div>
-                  <p className="mb-1.5 text-xs font-medium text-dhl-ink">
-                    Carries
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    {selected.compatibleUlds.map((code) => (
-                      <Badge key={code} variant="secondary" className="font-mono">
-                        {code}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
+                <AircraftLoadingDiagram aircraft={selected} ulds={ulds} />
               </div>
             </motion.div>
           </motion.div>
@@ -128,15 +103,3 @@ export function AircraftGallery({ aircraft }: AircraftGalleryProps) {
   );
 }
 
-function Legend({ color, label }: { color: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-      <span
-        className="size-3 rounded-sm ring-1 ring-foreground/15"
-        style={{ background: color }}
-        aria-hidden
-      />
-      {label}
-    </span>
-  );
-}
