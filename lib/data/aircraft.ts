@@ -1,0 +1,115 @@
+import type { Aircraft } from "./types";
+
+// Source-of-truth freighter aircraft data for the DHL ULD Academy.
+//
+// Unit conversions:
+//   pounds          = kg / —, i.e. kg * 2.20462   (rounded to integer)
+//   nautical miles  = km / 1.852                  (rounded to integer)
+//
+// mainDeck / lowerDeck list the PRIMARY position configuration. Additional ULD
+// types an aircraft can accept (in shared or alternate positions) are captured
+// in compatibleUlds rather than as separate position rows.
+
+export const aircraft: Aircraft[] = [
+  {
+    id: "b747-8f",
+    code: "747-8F",
+    name: "Boeing 747-8F",
+    manufacturer: "Boeing",
+    maxPayloadKg: 134200,
+    maxPayloadLbs: 295860,
+    rangeKm: 8130,
+    rangeNm: 4390,
+    mainDeck: [{ uldType: "PMC", count: 27 }],
+    lowerDeck: [
+      { uldType: "AKE", count: 28 },
+      { uldType: "AKH", count: 7 },
+    ],
+    compatibleUlds: ["AKE", "PMC", "PGA", "AMF", "AKH", "PKC", "RKN"],
+    bodyType: "wide",
+  },
+  {
+    id: "b747-400f",
+    code: "747-400F",
+    name: "Boeing 747-400F",
+    manufacturer: "Boeing",
+    maxPayloadKg: 113000,
+    maxPayloadLbs: 249122,
+    rangeKm: 8230,
+    rangeNm: 4444,
+    mainDeck: [{ uldType: "PMC", count: 30 }],
+    lowerDeck: [{ uldType: "AKE", count: 32 }],
+    compatibleUlds: ["AKE", "PMC", "PKC", "RKN"],
+    bodyType: "wide",
+  },
+  {
+    id: "b777f",
+    code: "777F",
+    name: "Boeing 777F",
+    manufacturer: "Boeing",
+    maxPayloadKg: 103000,
+    maxPayloadLbs: 227076,
+    rangeKm: 9070,
+    rangeNm: 4897,
+    mainDeck: [{ uldType: "PMC", count: 27 }],
+    lowerDeck: [{ uldType: "AKE", count: 32 }],
+    compatibleUlds: ["AKE", "PMC", "AKH", "RKN"],
+    bodyType: "wide",
+  },
+  {
+    id: "b767-300f",
+    code: "767-300F",
+    name: "Boeing 767-300F",
+    manufacturer: "Boeing",
+    maxPayloadKg: 58600,
+    maxPayloadLbs: 129191,
+    rangeKm: 6025,
+    rangeNm: 3253,
+    mainDeck: [{ uldType: "PMC", count: 24 }],
+    lowerDeck: [{ uldType: "AKE", count: 30 }],
+    compatibleUlds: ["AKE", "PMC", "DQF", "PKC", "RKN"],
+    bodyType: "wide",
+  },
+  {
+    id: "b757-200f",
+    code: "757-200F",
+    name: "Boeing 757-200F",
+    manufacturer: "Boeing",
+    maxPayloadKg: 39780,
+    maxPayloadLbs: 87700,
+    rangeKm: 5834,
+    rangeNm: 3151,
+    mainDeck: [{ uldType: "PMC", count: 15 }],
+    lowerDeck: [{ uldType: "AMP", count: 8 }],
+    compatibleUlds: ["PMC", "AMP"],
+    bodyType: "narrow",
+  },
+  {
+    id: "a300-600f",
+    code: "A300-600F",
+    name: "Airbus A300-600F",
+    manufacturer: "Airbus",
+    maxPayloadKg: 55300,
+    maxPayloadLbs: 121916,
+    rangeKm: 4800,
+    rangeNm: 2592,
+    mainDeck: [{ uldType: "PMC", count: 23 }],
+    lowerDeck: [{ uldType: "AKE", count: 30 }],
+    compatibleUlds: ["AKE", "PMC", "DQF", "RKN"],
+    bodyType: "wide",
+  },
+  {
+    id: "a330-200f",
+    code: "A330-200F",
+    name: "Airbus A330-200F",
+    manufacturer: "Airbus",
+    maxPayloadKg: 70000,
+    maxPayloadLbs: 154323,
+    rangeKm: 7400,
+    rangeNm: 3996,
+    mainDeck: [{ uldType: "PMC", count: 26 }],
+    lowerDeck: [{ uldType: "AKE", count: 36 }],
+    compatibleUlds: ["AKE", "PMC", "RKN"],
+    bodyType: "wide",
+  },
+];

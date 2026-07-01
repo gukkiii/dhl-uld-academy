@@ -1,26 +1,187 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+
+  /* DHL brand tokens — usable as bg-dhl-red, text-dhl-yellow, border-dhl-red, etc. */
+  --color-dhl-red: var(--dhl-red);
+  --color-dhl-red-dark: var(--dhl-red-dark);
+  --color-dhl-yellow: var(--dhl-yellow);
+  --color-dhl-yellow-soft: var(--dhl-yellow-soft);
+  --color-dhl-ink: var(--dhl-ink);
+  --color-dhl-surface: var(--dhl-surface);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* ---- DHL brand palette ---- */
+  --dhl-red: #d40511;
+  --dhl-red-dark: #b00410;
+  --dhl-yellow: #ffcc00;
+  --dhl-yellow-soft: #fff4cc;
+  --dhl-ink: #1a1a1a;
+  --dhl-surface: #f4f5f7;
+
+  --background: #ffffff;
+  --foreground: var(--dhl-ink);
+  --card: #ffffff;
+  --card-foreground: var(--dhl-ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--dhl-ink);
+
+  /* Primary maps to DHL red */
+  --primary: var(--dhl-red);
+  --primary-foreground: #ffffff;
+
+  --secondary: #f4f5f7;
+  --secondary-foreground: var(--dhl-ink);
+  --muted: #f4f5f7;
+  --muted-foreground: #6b7280;
+  --accent: #fff4cc;
+  --accent-foreground: var(--dhl-ink);
+  --destructive: oklch(0.577 0.245 27.325);
+
+  --border: #e6e8eb;
+  --input: #e6e8eb;
+  --ring: var(--dhl-red);
+
+  --chart-1: #d40511;
+  --chart-2: #ffcc00;
+  --chart-3: #1a1a1a;
+  --chart-4: #6b7280;
+  --chart-5: #b00410;
+
+  --radius: 0.625rem;
+
+  /* Sidebar — light surface with red active accents */
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--dhl-ink);
+  --sidebar-primary: var(--dhl-red);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f5f7;
+  --sidebar-accent-foreground: var(--dhl-red);
+  --sidebar-border: #e6e8eb;
+  --sidebar-ring: var(--dhl-red);
+
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+.dark {
+  --background: #0f1012;
+  --foreground: #f4f5f7;
+  --card: #16181b;
+  --card-foreground: #f4f5f7;
+  --popover: #16181b;
+  --popover-foreground: #f4f5f7;
+  --primary: var(--dhl-red);
+  --primary-foreground: #ffffff;
+  --secondary: #1d2024;
+  --secondary-foreground: #f4f5f7;
+  --muted: #1d2024;
+  --muted-foreground: #9aa1ab;
+  --accent: #2a2410;
+  --accent-foreground: var(--dhl-yellow);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #2a2d32;
+  --input: #2a2d32;
+  --ring: var(--dhl-red);
+  --chart-1: #d40511;
+  --chart-2: #ffcc00;
+  --chart-3: #f4f5f7;
+  --chart-4: #9aa1ab;
+  --chart-5: #b00410;
+  --sidebar: #16181b;
+  --sidebar-foreground: #f4f5f7;
+  --sidebar-primary: var(--dhl-red);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1d2024;
+  --sidebar-accent-foreground: var(--dhl-yellow);
+  --sidebar-border: #2a2d32;
+  --sidebar-ring: var(--dhl-red);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Signature DHL diagonal red→yellow accent */
+  .dhl-gradient {
+    background-image: linear-gradient(
+      100deg,
+      var(--dhl-red) 0%,
+      var(--dhl-red) 62%,
+      var(--dhl-yellow) 100%
+    );
+  }
+  .dhl-gradient-soft {
+    background-image: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--dhl-red) 6%, white) 0%,
+      color-mix(in srgb, var(--dhl-yellow) 10%, white) 100%
+    );
+  }
+  /* Thin yellow rule beneath red headers — a DHL signature detail */
+  .dhl-accent-bar {
+    background-image: linear-gradient(
+      90deg,
+      var(--dhl-yellow) 0%,
+      var(--dhl-yellow) 30%,
+      transparent 30%
+    );
+  }
 }
